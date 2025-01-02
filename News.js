@@ -1,38 +1,40 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
+
+const newsData = [
+  {
+    title: "Breaking News 1",
+    description: "This is the description for breaking news 1.",
+    image: require("../images/news1.jpg"),
+  },
+  {
+    title: "Breaking News 2",
+    description: "This is the description for breaking news 2.",
+    image: require("../images/news2.jpg"),
+  },
+  {
+    title: "Breaking News 3",
+    description: "This is the description for breaking news 3.",
+    image: require("../images/news3.jpg"),
+  },
+];
 
 function News() {
-  const [news, setNews] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("https://api.sampleapis.com/news") // Replace with your API URL
-      .then((response) => setNews(response.data))
-      .catch((error) => console.error("Error fetching news:", error));
-  }, []);
-
   return (
-    <div className="container mt-4">
-      <div className="row">
-        {news.map((article, index) => (
-          <div className="col-md-4" key={index}>
-            <div className="card mb-4">
-              <img
-                src={article.image || "https://via.placeholder.com/150"}
-                className="card-img-top"
-                alt={article.title}
-              />
-              <div className="card-body">
-                <h5 className="card-title">{article.title}</h5>
-                <p className="card-text">{article.description}</p>
-                <a href={article.url} className="btn btn-primary">
-                  Read More
-                </a>
-              </div>
+    <div className="row">
+      {newsData.map((news, index) => (
+        <div className="col-md-4 mb-4" key={index}>
+          <div className="card">
+            <img src={news.image} className="card-img-top" alt={news.title} />
+            <div className="card-body">
+              <h5 className="card-title">{news.title}</h5>
+              <p className="card-text">{news.description}</p>
+              <a href="#" className="btn btn-primary">
+                Read More
+              </a>
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   );
 }
